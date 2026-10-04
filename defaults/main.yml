@@ -1,2 +1,5 @@
 ---
 # defaults file for gitlab_runner
+gitlab_runner_version: "19.1.0*"
+gitlab_runner_repository_url: "https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_facts['distribution'] | lower }}"
+gitlab_runner_repository_gpg_key_url: "https://packages.gitlab.com/gpgkey/gpg.key"

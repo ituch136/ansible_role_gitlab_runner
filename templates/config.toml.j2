@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+concurrent = {{ gitlab_runner_concurrent }}
+check_interval = {{ gitlab_runner_check_interval }}
+shutdown_timeout = {{ gitlab_runner_shutdown_timeout }}
+
+{% for runner in gitlab_runner_runners %}
+[[runners]]
+  name = {{ runner.name | to_json }}
+  url = {{ runner.url | default("https://gitlab.com") | to_json }}
+  token = {{ runner.token | to_json }}
+  executor = {{ runner.executor | to_json }}
+  {% if runner.docker is defined %}
+  [runners.docker]
+    {% for key, value in runner.docker.items() %}
+    {{ key }} = {{ value | to_json }}
+    {% endfor %}
+  {% endif %}
+{% endfor %}

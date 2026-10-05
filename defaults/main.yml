@@ -3,3 +3,10 @@
 gitlab_runner_version: "19.1.0*"
 gitlab_runner_repository_url: "https://packages.gitlab.com/runner/gitlab-runner/{{ ansible_facts['distribution'] | lower }}"
 gitlab_runner_repository_gpg_key_url: "https://packages.gitlab.com/gpgkey/gpg.key"
+
+gitlab_runner_concurrent: 1
+gitlab_runner_check_interval: 0
+gitlab_runner_shutdown_timeout: 0
+gitlab_runner_no_log: true
+gitlab_runner_runners: []
+gitlab_runner_groups: []

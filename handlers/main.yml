@@ -2,4 +2,9 @@
 - name: Apt update
   ansible.builtin.apt:
     update_cache: true
+
+- name: Restart GitLab Runner
+  ansible.builtin.systemd:
+    name: gitlab-runner
+    state: restarted
 # handlers file for gitlab_runner

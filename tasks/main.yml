@@ -31,4 +31,22 @@
     name: gitlab-runner
     enabled: true
     state: started
+
+- name: Configure GitLab Runner
+  ansible.builtin.template:
+    src: config.toml.j2
+    dest: /etc/gitlab-runner/config.toml
+    owner: root
+    group: root
+    mode: '0600'
+  no_log: "{{ gitlab_runner_no_log }}"
+
+- name: Ensure GitLab Runner user in necessary groups
+  ansible.builtin.user:
+    name: gitlab-runner
+    groups: "{{ gitlab_runner_groups }}"
+    append: true
+  when: gitlab_runner_groups | length > 0
+  notify:
+    - Restart GitLab Runner
 # tasks file for gitlab_runner

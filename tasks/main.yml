@@ -3,13 +3,15 @@
   ansible.builtin.apt:
     name: python3-debian
     state: present
+    update_cache: true
+    cache_valid_time: 3600
   check_mode: false
 
 - name: Add GitLab Runner repository
   ansible.builtin.deb822_repository:
     name: gitlab-runner
     types: deb
-    uris: "{{ gitlab_runner_repository_url}}"
+    uris: "{{ gitlab_runner_repository_url }}"
     suites: "{{ ansible_facts.distribution_release }}"
     components: main
     signed_by: "{{ gitlab_runner_repository_gpg_key_url }}"
